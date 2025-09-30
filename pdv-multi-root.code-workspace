@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "AtendeToucht",
+      "path": "."
+    },
+    {
+      "name": "PDVTouch",
+      "path": "/home/rawston/pdvtouch"
+    }
+  ],
+  "settings": {
+    // Exemplo: você pode ter configurações específicas por pasta usando "[PDVTouch]" via profiles ou via settings per folder.
+  }
+}

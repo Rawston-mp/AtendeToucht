@@ -1,0 +1,7 @@
+{
+  "updatedAt": 1738272000000,
+  "items": [
+    { "id": "1", "sku": "SELF_SERVICE", "descricao": "Self service por quilo", "unidade": "KG", "preco": 59.9 },
+    { "id": "2", "sku": "REFRI_LATA", "descricao": "Refrigerante lata", "unidade": "UN", "preco": 6.0 }
+  ]
+}
