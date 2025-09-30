@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { getPdvBaseUrl, setPdvBaseUrl } from '@/services/pdvConfig'
 import { useOpenPDV } from '@/services/ssoToPDV'
+import { usePdvStatus } from '@/services/pdvHealth'
 
 export function ConfiguracoesPage() {
   const [url, setUrl] = useState<string>(getPdvBaseUrl() || '')
   const openPDV = useOpenPDV()
-
   const conectado = !!url.trim()
+  const status = usePdvStatus(conectado ? url : null, 5000)
 
   const salvar = () => {
     setPdvBaseUrl(url)
@@ -18,7 +19,13 @@ export function ConfiguracoesPage() {
       <div className="flex items-center gap-3">
         <h2 className="text-xl font-semibold">Configurações</h2>
         {conectado ? (
-          <span className="px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700 border border-emerald-300">Conectado ao PDV</span>
+          status === 'online' ? (
+            <span className="px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700 border border-emerald-300">Conectado ao PDV</span>
+          ) : status === 'offline' ? (
+            <span className="px-2 py-1 rounded-full text-xs bg-amber-100 text-amber-700 border border-amber-300" title="PDV não respondeu ao ping">PDV indisponível</span>
+          ) : (
+            <span className="px-2 py-1 rounded-full text-xs bg-slate-100 text-slate-600 border">Verificando PDV…</span>
+          )
         ) : (
           <span className="px-2 py-1 rounded-full text-xs bg-slate-100 text-slate-600 border">PDV não configurado</span>
         )}
