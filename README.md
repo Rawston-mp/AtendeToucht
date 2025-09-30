@@ -4,8 +4,7 @@
 Aplicação web responsiva com módulos de Estoque, Financeiro, Vendas e Relatórios. Construída com React, Vite e TypeScript. Estilos com Tailwind CSS.
 
 
-## Início rápido
-
+## Início rápido!!
 
 Instale dependências
 
