@@ -3,35 +3,46 @@ import { useEffect, useState } from 'react'
 export type PdvStatus = 'unknown' | 'online' | 'offline'
 
 export function pingPdv(baseUrl: string, timeoutMs = 1500): Promise<boolean> {
-  return new Promise((resolve) => {
-    if (!baseUrl) return resolve(false)
-    try {
-      const url = new URL(baseUrl)
-      // tentar um asset público comum
-      url.pathname = '/vite.svg'
-      const img = new Image()
-      const timer = setTimeout(() => {
-        cleanup()
+  const paths = ['/vite.svg', '/favicon.ico', '/']
+  const tryPath = (idx: number): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (!baseUrl) return resolve(false)
+      if (idx >= paths.length) return resolve(false)
+      try {
+        const u = new URL(baseUrl)
+        u.pathname = paths[idx]
+        const img = new Image()
+        let done = false
+        const cleanup = () => {
+          img.onload = null
+          img.onerror = null
+        }
+        const timer = setTimeout(() => {
+          if (done) return
+          cleanup()
+          resolve(false)
+        }, timeoutMs)
+        img.onload = () => {
+          if (done) return
+          done = true
+          clearTimeout(timer)
+          cleanup()
+          resolve(true)
+        }
+        img.onerror = async () => {
+          if (done) return
+          clearTimeout(timer)
+          cleanup()
+          // tenta o próximo caminho
+          resolve(await tryPath(idx + 1))
+        }
+        img.src = u.toString() + (u.search ? `&t=${Date.now()}` : `?t=${Date.now()}`)
+      } catch {
         resolve(false)
-      }, timeoutMs)
-      const cleanup = () => {
-        clearTimeout(timer)
-        img.onload = null
-        img.onerror = null
       }
-      img.onload = () => {
-        cleanup()
-        resolve(true)
-      }
-      img.onerror = () => {
-        cleanup()
-        resolve(false)
-      }
-      img.src = url.toString() + `?t=${Date.now()}`
-    } catch {
-      resolve(false)
-    }
-  })
+    })
+  }
+  return tryPath(0)
 }
 
 export function usePdvStatus(baseUrl: string | null, refreshMs = 0) {
