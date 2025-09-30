@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { getPdvBaseUrl, setPdvBaseUrl } from '@/services/pdvConfig'
 import { useOpenPDV } from '@/services/ssoToPDV'
 import { usePdvStatus } from '@/services/pdvHealth'
+import { verifyAdminPassword } from '@/services/userApi'
 
 export function ConfiguracoesPage() {
   const [url, setUrl] = useState<string>(getPdvBaseUrl() || '')
@@ -9,7 +10,13 @@ export function ConfiguracoesPage() {
   const conectado = !!url.trim()
   const status = usePdvStatus(conectado ? url : null, 5000)
 
-  const salvar = () => {
+  const salvar = async () => {
+    const senha = window.prompt('Confirme a senha de administrador para salvar as configurações:') || ''
+    const ok = await verifyAdminPassword(senha)
+    if (!ok) {
+      alert('Senha de administrador inválida.')
+      return
+    }
     setPdvBaseUrl(url)
     alert('URL do PDV salva!')
   }
