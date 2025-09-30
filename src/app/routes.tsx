@@ -19,6 +19,7 @@ import { TransportadorasPage } from '@/pages/Cadastro/Transportadoras/Transporta
 import { FuncionariosPage } from '@/pages/Cadastro/Funcionarios/FuncionariosPage'
 import { ConvenioPage } from '@/pages/Cadastro/Convenio/ConvenioPage'
 import { AdministradoraCartaoPage } from '@/pages/Cadastro/AdministradoraCartao/AdministradoraCartaoPage'
+import { ConfiguracoesPage } from '@/pages/Cadastro/Configuracoes/ConfiguracoesPage'
 import { ListaProdutosPage } from '@/pages/Estoque/ListaProdutosPage'
 import { EntradaManualPage } from '@/pages/Estoque/EntradaManualPage'
 import { ImportarXMLPage } from '@/pages/Estoque/ImportarXMLPage'
@@ -49,6 +50,11 @@ return (
 	<Route path="/cadastro/funcionarios" element={<FuncionariosPage />} />
 	<Route path="/cadastro/convenio" element={<ConvenioPage />} />
 	<Route path="/cadastro/administradora-cartao" element={<AdministradoraCartaoPage />} />
+	<Route path="/cadastro/configuracoes" element={
+			<ProtectedRoute autorizacao="Acesso Admin">
+				<ConfiguracoesPage />
+			</ProtectedRoute>
+		} />
 
 
 <Route path="/estoque" element={<ListaProdutosPage />} />

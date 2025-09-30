@@ -25,6 +25,7 @@ return (
 		<Item to="/cadastro/funcionarios">Funcionários</Item>
 		<Item to="/cadastro/convenio">Convênio</Item>
 		<Item to="/cadastro/administradora-cartao">Administradora cartão</Item>
+		<Item to="/cadastro/configuracoes">Configurações</Item>
 <div className="mt-4 mb-2 text-xs uppercase text-slate-400">Estoque</div>
 <Item to="/estoque">Produtos</Item>
 <Item to="/estoque/entrada-manual">Entrada manual</Item>
