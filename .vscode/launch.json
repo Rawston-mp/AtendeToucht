@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PDVTouch: Abrir no Chrome (http://localhost:5173)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "/home/rawston/pdvtouch/prototype/src",
+      "preLaunchTask": "PDVTouch: Web (App + Mock WS)"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "PDVTouch: App + WS + Chrome",
+      "configurations": ["PDVTouch: Abrir no Chrome (http://localhost:5173)"],
+      "preLaunchTask": "PDVTouch: Web (App + Mock WS)"
+    }
+  ]
+}

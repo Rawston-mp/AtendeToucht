@@ -1,0 +1,108 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "PDVTouch: Web (App + Mock WS)",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "web"],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: App (Vite dev)",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: Mock WS",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "mock:ws"],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch/prototype"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: Build",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: Preview",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "preview"],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: Icons (gerar a partir de logo.svg)",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "icons"],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch/prototype"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: Icons from (preserva 16/32)",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "icons:from",
+        "--",
+        "${input:pdvImagePath}"
+      ],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch/prototype"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "PDVTouch: Icons from (sobrescreve 16/32)",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "icons:from",
+        "--",
+        "--overwrite-small",
+        "${input:pdvImagePath}"
+      ],
+      "options": {
+        "cwd": "/home/rawston/pdvtouch/prototype"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "pdvImagePath",
+      "type": "promptString",
+      "description": "Caminho do arquivo de imagem (SVG/PNG) para gerar os ícones",
+      "default": "src/assets/logo.svg"
+    }
+  ]
+}
